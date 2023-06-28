@@ -1,13 +1,9 @@
-# co72e499baf5f48346e5975cf
+# food-order-app
 
-Quick start:
+solo project in the scrimba Frontend Developer Career Path
 
-```
-$ npm install
-$ npm start
-````
+<img src="screenshot.jpg" alt="screenshot" width="200px">
 
-Head over to https://vitejs.dev/ to learn more about using vite
 ## About Scrimba
 
 At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
