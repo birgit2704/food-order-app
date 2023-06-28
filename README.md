@@ -2,8 +2,6 @@
 
 solo project in the scrimba Frontend Developer Career Path
 
-<img src="screenshot.jpg" alt="screenshot" width="200px">
-
 ## About Scrimba
 
 At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
