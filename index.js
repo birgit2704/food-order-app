@@ -2,6 +2,7 @@ import { menuArray } from "./data.js";
 
 let orderedArray = [];
 let totalPrice = 0;
+const foodOptionBtns = document.querySelectorAll(".food-option-btn");
 
 document
   .getElementById("general-container")
@@ -14,6 +15,13 @@ function handleSubmit(e) {
   const userName = document.getElementById("name").value;
   document.getElementById("modal").style.display = "none";
   document.getElementById("general-container").style.backgroundColor = "white";
+
+  const btns = document.querySelectorAll(".food-option-btn");
+  console.log(btns);
+  btns.forEach((button) => {
+    button.style.backgroundColor = "white";
+    button.disabled = true;
+  });
   document.getElementById("order-container").innerHTML = `
     <div >
     <p class="thanks" id="thanks">Thanks, ${userName}! Your order is on its way!</p>
@@ -23,6 +31,7 @@ function handleSubmit(e) {
 function handleClick(e) {
   //add food item
   if (e.target.id === "food-option-btn") {
+    document.getElementById("order-container").style.display = "flex";
     let foodObj = menuArray[e.target.dataset.id];
     orderedArray.push(foodObj);
     updateTotalPrice();
@@ -41,7 +50,14 @@ function handleClick(e) {
   if (e.target.id === "complete-order") {
     document.getElementById("modal").style.display = "block";
     document.getElementById("general-container").style.backgroundColor =
-      "darkgrey";
+      "lightgrey";
+    document;
+    const btns = document.querySelectorAll(".food-option-btn");
+    console.log(btns);
+    btns.forEach((button) => {
+      button.style.backgroundColor = "lightgrey";
+      button.disabled = true;
+    });
   }
 }
 
@@ -77,7 +93,7 @@ function renderMenuItems() {
   menuArray.forEach(function (food) {
     innerHtml += `
         <div class="food-option">
-          <p class="emoji">${food.emoji}</p>
+          <img class="emoji" src="./images/${food.emoji}"/>
           <div class="food-option-text">
             <h2>${food.name}</h2>
             <p>${food.ingredients}</p>
