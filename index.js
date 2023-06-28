@@ -1,28 +1,38 @@
 import { menuArray } from "./data.js";
 
 let orderedArray = [];
+let totalPrice = 0;
 
 document
   .getElementById("general-container")
   .addEventListener("click", handleClick);
 
-document.querySelector("form").addEventListener("submit", (e) => {
+document.querySelector("form").addEventListener("submit", handleSubmit);
+
+function handleSubmit(e) {
   e.preventDefault();
   const userName = document.getElementById("name").value;
-  console.log(userName);
   document.getElementById("modal").style.display = "none";
   document.getElementById("general-container").style.backgroundColor = "white";
   document.getElementById("order-container").innerHTML = `
-  <div >
-  <p class="thanks" id="thanks">Thanks, ${userName}! Your order is on its way!</p>
-</div></p>`;
-});
+    <div >
+    <p class="thanks" id="thanks">Thanks, ${userName}! Your order is on its way!</p>
+  </div></p>`;
+}
 
 function handleClick(e) {
   //add food item
   if (e.target.id === "food-option-btn") {
     let foodObj = menuArray[e.target.dataset.id];
     orderedArray.push(foodObj);
+    updateTotalPrice();
+    renderOrderedFoodArray(orderedArray);
+  }
+
+  //remove food item
+  if (e.target.id === "order-remove-btn") {
+    const nameItemToBeDeleted = menuArray[e.target.dataset.id].name;
+    orderedArray = orderedArray.filter((el) => el.name !== nameItemToBeDeleted);
     updateTotalPrice();
     renderOrderedFoodArray(orderedArray);
   }
@@ -40,7 +50,7 @@ function renderOrderedFoodArray(arr) {
   arr.forEach(function (food) {
     innerHtmlOrder += `
               <div class="ordered-food">
-                  <h2>${food.name}</h2>
+                  <h2 data-id=${food.name}>${food.name}</h2>
                   <button class="order-remove-btn" id="order-remove-btn" data-id="${food.id}">remove</button>
                   <h2 class="order-price">$${food.price}</h2>
               </div>
@@ -51,15 +61,14 @@ function renderOrderedFoodArray(arr) {
 }
 
 function updateTotalPrice() {
-  let totalPrice = 0;
   if (orderedArray.length === 0) {
-    totalPrice = "0";
+    totalPrice = 0;
   } else {
-    const totalPrice = orderedArray
+    totalPrice = orderedArray
       .map((el) => el.price)
       .reduce((sum, el) => sum + el);
-    document.getElementById("order-total-price").innerHTML = `$${totalPrice}`;
   }
+  document.getElementById("order-total-price").innerHTML = `$${totalPrice}`;
 }
 
 function renderMenuItems() {
