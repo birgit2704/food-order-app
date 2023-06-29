@@ -1,6 +1,7 @@
 # food-order-app
 
-solo project in the scrimba Frontend Developer Career Path
+solo project in the scrimba Frontend Developer Career Path  
+<img src="screenshot.jpg" alt="screenshot" width="200px">
 
 ## About Scrimba
 
